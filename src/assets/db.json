@@ -1,14 +1,3 @@
 {
-  "tasks": [
-    {
-      "task": "вфвфвц",
-      "completed": false,
-      "id": 3
-    },
-    {
-      "task": "dwadwa",
-      "completed": false,
-      "id": 4
-    }
-  ]
+  "tasks": []
 }
