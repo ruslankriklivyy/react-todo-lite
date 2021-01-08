@@ -14,7 +14,7 @@ const AddTasks = ({ onAddTask }) => {
       alert('Введите текст задачи');
       return;
     }
-    const obj = { id: Math.floor(Math.random()), task: inputValue, completed: false };
+    const obj = { task: inputValue, completed: false };
     onAddTask(obj);
     setInputValue('');
   };

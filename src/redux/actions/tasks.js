@@ -5,6 +5,12 @@ const REMOVE_TASK = 'REMOVE_TASK';
 const SET_TASKS = 'SET_TASKS';
 const EDIT_TASK = 'EDIT_TASK';
 const SET_COMPLETED = 'SET_COMPLETED';
+const SET_LOADING = 'SET_LOADING';
+
+export const setIsLoading = (payload) => ({
+  type: SET_LOADING,
+  payload,
+});
 
 export const addTaskAction = (obj) => ({
   type: ADD_TASK,
@@ -22,9 +28,18 @@ export const editTaskAction = (obj) => ({
 });
 
 export const getTasks = () => (dispatch) => {
-  axios.get('http://localhost:3001/tasks').then(({ data }) => {
-    dispatch(setTasks(data));
-  });
+  dispatch(setIsLoading(true));
+  axios
+    .get('tasks')
+    .then(({ data }) => {
+      dispatch(setTasks(data));
+    })
+    .catch(() => {
+      alert('Не удалось загрузить список задач');
+    })
+    .finally(() => {
+      dispatch(setIsLoading(false));
+    });
 };
 
 export const setCompletedTask = (id, completed) => ({

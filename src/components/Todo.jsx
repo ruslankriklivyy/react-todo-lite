@@ -4,11 +4,12 @@ import { addTaskAction, editTaskAction, removeTaskAction, getTasks } from '../re
 import axios from 'axios';
 import { setCompletedTask } from '../redux/actions/tasks';
 
-import { AddTasks, Tasks } from '../components';
+import { AddTasks, Tasks, Preloader } from '../components';
 
 const Todo = () => {
   const dispatch = useDispatch();
   const items = useSelector(({ tasks }) => tasks.items);
+  const isLoading = useSelector(({ tasks }) => tasks.isLoading);
 
   React.useEffect(() => {
     dispatch(getTasks());
@@ -52,12 +53,16 @@ const Todo = () => {
       <div className="container">
         <div className="header">Список задач</div>
         <AddTasks onAddTask={onAddTask} />
-        <Tasks
-          tasks={items}
-          onEditTask={onEditTask}
-          onRemoveTask={onRemoveTask}
-          onHandleCompleted={onHandleCompleted}
-        />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <Tasks
+            tasks={items}
+            onEditTask={onEditTask}
+            onRemoveTask={onRemoveTask}
+            onHandleCompleted={onHandleCompleted}
+          />
+        )}
       </div>
     </div>
   );

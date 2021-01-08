@@ -26,8 +26,8 @@ const Tasks = ({ tasks, onEditTask, onRemoveTask, onHandleCompleted }) => {
     onHandleCompleted(id, completed);
   };
 
-  return !tasks ? (
-    <div>Загрузка...</div>
+  return !tasks.length ? (
+    <div className="todo-tasks-empty">Список задач пуст</div>
   ) : (
     tasks.map(({ task, id, completed }) => (
       <div key={id} className="todo-tasks">
