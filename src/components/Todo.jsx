@@ -17,7 +17,7 @@ const Todo = () => {
 
   const onAddTask = (obj) => {
     axios
-      .post('http://localhost:3001/tasks', {
+      .post('tasks', {
         task: obj.task,
         completed: obj.completed,
       })
@@ -28,7 +28,7 @@ const Todo = () => {
 
   const onEditTask = (obj) => {
     axios
-      .patch('http://localhost:3001/tasks/' + obj.id, {
+      .patch('tasks/' + obj.id, {
         task: obj.task,
       })
       .then(({ data }) => {
@@ -37,12 +37,12 @@ const Todo = () => {
   };
 
   const onRemoveTask = (id) => {
-    axios.delete('http://localhost:3001/tasks/' + id);
+    axios.delete('tasks/' + id);
     dispatch(removeTaskAction(id));
   };
 
   const onHandleCompleted = (id, completed) => {
-    axios.patch('http://localhost:3001/tasks/' + id, {
+    axios.patch('tasks/' + id, {
       completed,
     });
     dispatch(setCompletedTask({ id, completed }));
